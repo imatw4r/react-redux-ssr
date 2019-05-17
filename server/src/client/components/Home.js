@@ -1,6 +1,14 @@
 import React from 'react';
 
 
-export default Home = () => {
-  return <div>I'm the Home component</div>
+const Home = () => {
+  return (
+    <div>
+
+      <div>I'm the Best Home component</div>
+      <button onClick={() => console.log('Hi there!')}>Press me!</button>
+    </div>
+  )
 }
+
+export default Home

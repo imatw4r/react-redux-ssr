@@ -7034,20 +7034,36 @@ if (process.env.NODE_ENV === 'production') {
 "use strict";
 
 
-var express = __webpack_require__(53);
-var React = __webpack_require__(16);
-var renderToString = __webpack_require__(109).renderToString;
-var Home = __webpack_require__(120).default;
+var _express = __webpack_require__(53);
 
-var app = express();
+var _express2 = _interopRequireDefault(_express);
 
-app.route('/', function (req, resp) {
-  var content = renderToString(React.createElement(Home, null));
-  resp.send(content);
+var _react = __webpack_require__(16);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _server = __webpack_require__(109);
+
+var _Home = __webpack_require__(120);
+
+var _Home2 = _interopRequireDefault(_Home);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var app = (0, _express2.default)();
+
+app.use(_express2.default.static('public')); // treat public dir as static to the outside world
+
+app.get('/', function (req, resp) {
+  var content = (0, _server.renderToString)(_react2.default.createElement(_Home2.default, null));
+
+  // This 
+  var html = '\n    <html>\n      <head></head>\n      <body>\n        <div id="root">' + content + '</div>\n        <script src="bundle.js"></script> \n      </body>\n    </html>\n  '; /** This <script> part will tell to download script from public/bundle.js **/
+  resp.send(html);
 });
 
-app.listen(3000, function () {
-  console.log('Listening on port 3000');
+app.listen(8080, function () {
+  console.log('Listening on port 8080');
 });
 
 /***/ }),
@@ -22449,13 +22465,26 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.default = Home = function Home() {
+var Home = function Home() {
   return _react2.default.createElement(
     'div',
     null,
-    'I\'m the Home component'
+    _react2.default.createElement(
+      'div',
+      null,
+      'I\'m the Best Home component'
+    ),
+    _react2.default.createElement(
+      'button',
+      { onClick: function onClick() {
+          return console.log('Hi there!');
+        } },
+      'Press me!'
+    )
   );
 };
+
+exports.default = Home;
 
 /***/ })
 /******/ ]);
