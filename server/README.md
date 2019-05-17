@@ -1,0 +1,1 @@
+Project based on https://clearcode01.udemy.com/server-side-rendering-with-react-and-redux/learn/lecture/8202264#overview
