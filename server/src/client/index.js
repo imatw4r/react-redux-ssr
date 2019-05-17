@@ -10,5 +10,3 @@ import Home from './components/Home';
 ReactDOM.hydrate(<Home />, document.querySelector('#root')); 
 
 console.log('Hi there');
-
-

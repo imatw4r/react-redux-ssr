@@ -10,7 +10,6 @@ app.use(express.static('public')) // treat public dir as static to the outside w
 app.get('/', (req, resp) => {
   const content = renderToString(<Home/>)
   
-  // This 
   const html = `
     <html>
       <head></head>
@@ -24,5 +23,5 @@ app.get('/', (req, resp) => {
 })
 
 app.listen(8080, () => {
-  console.log('Listening on port 8080');
+  console.log('Listenisng on port 8080');
 })
