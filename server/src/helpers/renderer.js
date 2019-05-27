@@ -1,24 +1,29 @@
-import React from 'react';
-import { renderToString } from 'react-dom/server';
-import { StaticRouter } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import Routes from '../client/routes';
+import React from "react";
+import { renderToString } from "react-dom/server";
+import { StaticRouter } from "react-router-dom";
+import { Provider } from "react-redux";
+import { renderRoutes } from "react-router-config";
+import Routes from "../client/routes";
+import serialize from "serialize-javascript";
 
 export default (req, store) => {
   const content = renderToString(
-    <Provider store={store} >
-      <StaticRouter location={req.path} context={{}}> 
-        <Routes />
+    <Provider store={store}>
+      <StaticRouter location={req.path} context={{}}>
+        <div>{renderRoutes(Routes)}</div>
       </StaticRouter>
     </Provider>
-  ) // context is required argument to create StaticRouter
+  ); // context is required argument to create StaticRouter
   return `
     <html>
       <head></head>
       <body>
         <div id="root">${content}</div>
+        <script>
+          window.INITIAL_STATE = ${serialize(store.getState())}
+        </script>
         <script src="bundle.js"></script> 
       </body>
     </html>
-  `
-}
+  `;
+};
